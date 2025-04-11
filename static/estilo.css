@@ -90,7 +90,7 @@ body.login {
 }
 
 /* Estilizando a entrada de texto*/
-.caixa-de-login input {
+.caixa-de-login input, textarea {
     width: 200px; /*mudei a largura */
     height: 30px; /*mudei a altura*/
     font-size: 1.1rem; /*mudei tamanho da fonte*/ 
@@ -101,6 +101,11 @@ body.login {
 
     padding-left: 10px; /*adicionei espaço antes do texto*/
     padding-right: 10px;
+}
+
+textarea {
+    resize: vertical; /*atributo especifico da textarea, só deixa mudar o tamanho na vertical*/
+    height: 200px;
 }
 
 /* Página home */

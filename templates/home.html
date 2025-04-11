@@ -10,7 +10,7 @@
     <img id="logo-home" src="/static/img/Logo texto.png">
    
     <div class="botoes">
-        <a href="/novo"> + Criar uma música</a>
+        <a href="/criar-musica"> + Criar uma música</a>
     </div>
     
       <!-- Seção de "Minhas Criações" -->
@@ -27,16 +27,10 @@
               <p>Letra: Viciado em adrenalina, só sinto amor quando a gente briga...</p>
             </div>
           </div>
-  
-          <div class="card">
-            <img src="/static/img/capa2.jpeg" alt="Capa do Projeto" class="cover">
-            <div class="card-content">
-              <h3>Outra Música</h3>
-              <p>Artista: Seu Nome</p>
-              <p>Status: Em gravação</p>
-              <p>Letra: Eu te levei para meu templo, vulnerável com meus sentimentos...</p>
-            </div>
-          </div>
+        {%for musica in musicas%}
+          {{musica}}
+        {% endfor %}
+
   
           <!-- Mais cards podem ser adicionados aqui -->
         </div>

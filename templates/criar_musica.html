@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Criar música</title>
     <!-- Criar link HTML e CSS -->
     <link rel="stylesheet" href="static/estilo.css">
     <!-- Adicionar o ícone (favicon) do site -->
@@ -14,15 +14,21 @@
 <body class="login">
     <img id="logo" src="/static/img/Logo texto.png">
     <div class="caixa-de-login">
-        <form action="/login" method="POST">
-            <h2>Login</h2>
-            <p>E-mail</p>
-            <!-- Adiciona ENTRADA DE TEXTO -->
-            <input type='text' id='email' name='email' placeholder="Digite seu usuário">
+        <form action="/criar-musica" method="POST">
+            <h2>Criar música</h2>
+            <p>Nome da música</p>
+            <input type='text'  name='nome_musica' placeholder="Digite o nome da música">
 
-            <p>Senha</p>
-            <!-- Adiciona ENTRADA DE SENHA -->
-            <input type='password' id='senha' name='senha' placeholder="Digite sua senha">
+            <p>Artista</p>
+            <input type='text'  name='artista' placeholder="Digite o nome do artista">
+
+            <p>Status</p>
+            <input type='text'  name='status' placeholder="Digite seu status">
+
+            <p>Letra</p>
+            <textarea name="letra"></textarea>
+
+
             <br>
             {% with messages = get_flashed_messages() %}
             {% if messages %}
