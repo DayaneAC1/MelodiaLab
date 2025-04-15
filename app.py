@@ -21,7 +21,7 @@ def login():
 
 @app.route('/home')
 def home():
-    musicas = database.pegar_musicas()
+    musicas = database.pegar_musicas(session['email'])
     return render_template('home.html', musicas=musicas)
 
 @app.route('/cadastro', methods=["GET", "POST"]) #rota para a página de login
@@ -39,11 +39,20 @@ def cadastro():
 def criar_musica():
     if request.method == "POST":
         form = request.form
-        database.criar_musica(form)
+        database.criar_musica(form, session['email'])
         return redirect("/home")
     else:
         return render_template("criar_musica.html")
-            
+    
+@app.route('/editar-musica/<id>', methods=["GET", "POST"])
+def editar_musica(id):
+    if request.method == "POST":
+        form = request.form
+        database.editar_musica(form, id)
+        return redirect("/home")
+    else:
+        return render_template("editar_musica.html",musica=database.pegar_musica(id))
+        
     
 
 # parte principal do

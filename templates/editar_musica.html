@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar música</title>
+    <!-- Criar link HTML e CSS -->
+    <link rel="stylesheet" href="/static/estilo.css">
+    <!-- Adicionar o ícone (favicon) do site -->
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+</head>
+
+<body class="login">
+    <img id="logo" src="/static/img/Logo texto.png">
+    <div class="caixa-de-login">
+        <form action="/editar-musica/{{musica[0]}}" method="POST">
+            <h2>Editar música</h2>
+            <p>Nome da música</p>
+            <input type='text'  name='nome_musica' placeholder="Digite o nome da música" value="{{musica[1]}}">
+            <p>Artista</p>
+            <input type='text'  name='artista' placeholder="Digite o nome do artista" value="{{musica[2]}}">
+            <p>Status</p>
+            <input type='text'  name='status' placeholder="Digite seu status" value="{{musica[3]}}">
+            <p>Letra</p>
+            <textarea name="letra">{{musica[4]}}</textarea>
+            <br>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="resposta">
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            {% block body %}{% endblock %}
+            <br>
+            <div class="botoes">
+                <!-- <a href="">Entrar</a> -->
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+
+</html>

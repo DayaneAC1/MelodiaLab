@@ -18,7 +18,6 @@ def criar_tabelas():
                    foreign key (email_usuario) references usuarios(email))''')
     
 def criar_usuario (formulario):
-    # Verificar se o email já existe no Banco de Dados
     conexao = conectar_banco()
     cursor = conexao.cursor()
     cursor.execute('''SELECT COUNT (email) FROM usuarios WHERE email=?''',(formulario['email'],))
@@ -38,27 +37,21 @@ def criar_usuario (formulario):
 def login(formulario):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    
-    #Verificando se o e-mail existe no banco de dados
     cursor.execute('''SELECT COUNT(email) FROM usuarios WHERE email=?''',(formulario['email'],))
     conexao.commit()
     
     quantidade_de_emails = cursor.fetchone()
     print(quantidade_de_emails)
     
-    #Se o e-mail não estiver cadastrado, retorna False
     
     if quantidade_de_emails[0] == 0:
         print("E-mail não cadastrado! Tente novamente")
         return False
     
-    #Obtenha a senha criptografada do usuário no banco
-    
     cursor.execute('''SELECT senha FROM usuarios WHERE email=?''', (formulario['email'],))
     conexao.commit()
     senha_criptografada = cursor.fetchone()
     
-    #Verificando se a senha fornecida corresponde à senha armazenada
     return check_password_hash(senha_criptografada[0], formulario['senha'])
 
 def verificar_usuario (formulario):
@@ -77,20 +70,33 @@ def verificar_usuario (formulario):
         else:
             return False
         
-def criar_musica (formulario):
+def criar_musica (formulario, email):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute('''INSERT INTO projetos_musicais (nome_musica, artista, status, letra) 
-                   VALUES (?, ?, ?, ?)''', (formulario ['nome_musica'],
-                    formulario['artista'], formulario['status'], formulario['letra']))
+    cursor.execute('''INSERT INTO projetos_musicais (nome_musica, artista, status, letra, email_usuario) 
+                   VALUES (?, ?, ?, ?, ?)''', (formulario ['nome_musica'],
+                    formulario['artista'], formulario['status'], formulario['letra'], email))
     conexao.commit()
     
-def pegar_musicas ():
+def pegar_musicas (email):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute('''SELECT * FROM projetos_musicais ''')
+    cursor.execute('''SELECT * FROM projetos_musicais WHERE email_usuario=?''', (email,))
     return cursor.fetchall()
-    
+
+def editar_musica(formulario, id):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute('''UPDATE projetos_musicais SET nome_musica=?, artista=?, status=?, letra=? WHERE id=?''',
+                   (formulario['nome_musica'], formulario['artista'], formulario['status'], formulario['letra'], id))
+    conexao.commit()
+    return True
+
+def pegar_musica(id):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute('''SELECT * FROM projetos_musicais WHERE id=?''', (id,))
+    return cursor.fetchone()
     
 
 # PARTE PRINCIPAL DO PROGRAMA
