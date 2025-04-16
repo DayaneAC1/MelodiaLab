@@ -52,6 +52,25 @@ def editar_musica(id):
         return redirect("/home")
     else:
         return render_template("editar_musica.html",musica=database.pegar_musica(id))
+    
+@app.route('/musica/excluir/<int:id>', methods=["GET"])
+def excluir_musica(id):
+    
+    email = session['email'] #pega o e-mail da sessão para verificar se é o dono da tarefa
+    
+    if database.excluir_musica(id, email):
+        return redirect('/home')
+    else:
+        return "Ocorreu um erro ao excluir tarefa"
+    
+@app.route('/excluir-usuario')
+def excluir_usuario():
+    email = session['email']
+    
+    if database.excluir_usuario(email):
+        return redirect("/")
+    else:
+        return "Ocorreu um erro ao excluir usuário"
         
     
 

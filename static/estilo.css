@@ -171,3 +171,15 @@ body#home {
     font-size: 14px;
     color: #666;
 }
+
+a {
+    text-decoration: none; /*Tira o sublinhado das ancoras */
+}
+
+.excluir {
+    position: fixed; /*Fixa a posição na tela */
+    /*Colocando a posição 10 pixels a direita */
+    right: 10px;
+    /*Colocando a posição 10 pixels a baixo */ 
+    bottom: 10px;
+}

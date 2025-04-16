@@ -97,6 +97,29 @@ def pegar_musica(id):
     cursor = conexao.cursor()
     cursor.execute('''SELECT * FROM projetos_musicais WHERE id=?''', (id,))
     return cursor.fetchone()
+
+def excluir_musica(id, email_usuario):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    #Verificar se o email que quer excluir a tarefa é realmente dono da tarefa
+    cursor.execute('''SELECT email_usuario FROM projetos_musicais WHERE id=?''', (id,))
+    email = cursor.fetchone()
+    if(email_usuario != email[0]):
+        return False
+    else:
+        cursor.execute('''DELETE FROM projetos_musicais WHERE id=?''', (id,))
+        conexao.commit()
+        return True
+
+def excluir_usuario(email):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    cursor.execute('''DELETE FROM projetos_musicais WHERE email_usuario=?''',(email,))
+    cursor.execute('''DELETE FROM usuarios WHERE email=?''',(email,))
+    conexao.commit()
+    return True
     
 
 # PARTE PRINCIPAL DO PROGRAMA

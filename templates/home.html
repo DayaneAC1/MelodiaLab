@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-<link rel="stylesheet" href="static/estilo.css">
-</head>
-<body id="home">
-    <img id="logo-home" src="/static/img/Logo texto.png">
-   
+    <link rel="stylesheet" href="static/estilo.css" />
+  </head>
+  <body id="home">
+    <img id="logo-home" src="/static/img/Logo texto.png" />
+
     <div class="botoes">
-        <a href="/criar-musica"> + Criar uma música</a>
+      <a href="/criar-musica"> + Criar uma música</a>
     </div>
-    
-      <!-- Seção de "Minhas Criações" -->
-      <section class="my-creations">
-        <h2>Minhas Criações</h2>
-        <div class="cards-container">
-          <!-- Card de projeto musical -->
-          
+
+    <!-- Seção de "Minhas Criações" -->
+    <section class="my-creations">
+      <h2>Minhas Criações</h2>
+      <div class="cards-container">
+        <!-- Card de projeto musical -->
+
         {%for musica in musicas%}
+        <a href="/editar-musica/{{musica[0]}}">
           <div class="card">
-            <img src="/static/img/capa1.jpeg" alt="Capa do Projeto" class="cover">
+            <img
+              src="/static/img/capa1.jpeg"
+              alt="Capa do Projeto"
+              class="cover"
+            />
             <div class="card-content">
               <h3>{{musica[1]}}</h3>
               <p>Artista: {{musica[2]}}</p>
               <p>Status: {{musica[3]}}</p>
               <p>Letra: {{musica[4]}}</p>
-              <a href="/editar-musica/{{musica[0]}}"> + Editar uma música</a> 
             </div>
           </div>
+        </a>
         {% endfor %}
 
-  
-          <!-- Mais cards podem ser adicionados aqui -->
-        </div>
-      </section>
-
-</body>
+        <!-- Mais cards podem ser adicionados aqui -->
+      </div>
+    </section>
+    <div class="botoes excluir">
+      <a href="/excluir-usuario">Excluir usuário</a>
+    </div>
+  </body>
 </html>
